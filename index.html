@@ -1,1 +1,116 @@
-<placeholder>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoneyCoin AI Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+:root{--card:#fffbf3;--inner:#f7f0e0;--border:#e0d0a8;--gold:#b8860b;--goldl:#d4a84b;--goldd:#8b6914;--text:#2c2416;--muted:#7a6b4e;--green:#2e7d32;--red:#c62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(165deg,#faf6eb 0%,#f3e9d4 40%,#efe2c4 100%);color:var(--text);min-height:100vh;padding:20px 16px;line-height:1.55}
+.container{max-width:860px;margin:0 auto}
+header{text-align:center;margin-bottom:18px;padding:12px 0;border-bottom:2px solid #c9a227}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--goldd);letter-spacing:1px}
+.ai-badge{display:inline-block;background:linear-gradient(135deg,#c9a227,#e6c35c);color:#2c2416;font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:1.2px;margin-left:8px;vertical-align:middle}
+.subtitle{color:var(--muted);font-size:.88rem}
+.group-tabs,.coin-tabs,.controls,.links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.group-tabs{margin:16px 0 10px}
+.coin-tabs{margin-bottom:16px}
+.group-tab{background:#fff;border:2px solid #c9a227;color:var(--goldd);padding:10px 28px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer}
+.group-tab.active{background:linear-gradient(180deg,#d4af37,#b8860b);color:#fff;border-color:#8b6914}
+.coin-tab{background:#fff;border:1.5px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:8px;font-weight:600;font-size:.88rem;cursor:pointer}
+.coin-tab.active{background:linear-gradient(180deg,#e6c35c,#c9a227);border-color:#8b6914;color:#2c2416}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 4px 18px rgba(139,105,20,.08)}
+.card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;color:var(--goldd);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.stat{flex:1 1 120px;background:var(--inner);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.stat-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px}
+.stat-value{font-size:1.15rem;font-weight:600}
+.positive{color:var(--green)}.negative{color:var(--red)}
+.alert-box{text-align:center;padding:14px;border-radius:8px;font-size:1.05rem;font-weight:600;margin:12px 0;border:1.5px solid}
+.alert-buy{background:#e8f5e9;border-color:#4caf50;color:#1b5e20}
+.alert-sell{background:#ffebee;border-color:#e57373;color:#b71c1c}
+.alert-hold{background:#fff8e1;border-color:var(--goldl);color:var(--goldd)}
+.alert-strong-buy{background:#c8e6c9;border-color:#2e7d32;color:#1b5e20}
+.alert-strong-sell{background:#ffcdd2;border-color:#c62828;color:#b71c1c}
+button{font-family:Inter,sans-serif;background:linear-gradient(180deg,#d4af37,#b8860b);color:#fff;border:1px solid #8b6914;padding:9px 16px;border-radius:6px;font-weight:600;font-size:.82rem;cursor:pointer}
+button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;color:var(--goldd)}
+.status,.meta{text-align:center;color:var(--muted);font-size:.76rem;margin-top:8px}
+.mode-badge{display:inline-block;font-size:.62rem;padding:2px 7px;border-radius:4px;font-weight:700}
+.mode-live{background:#e8f5e9;color:#2e7d32;border:1px solid #4caf50}
+.mode-local{background:#fff8e1;color:var(--goldd);border:1px solid var(--goldl)}
+.help-box{display:none;background:#fff8e1;border:1.5px solid #c9a227;border-radius:8px;padding:14px 16px;margin:10px 0 4px;font-size:.86rem}
+.help-box.visible{display:block}
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:14px}
+.tab-btn{flex:1;background:transparent;border:none;color:var(--muted);padding:11px 6px;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;border-radius:0}
+.tab-btn.active{color:var(--goldd);border-bottom-color:var(--gold)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.news-item{padding:10px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.news-date{color:var(--gold);font-size:.7rem;text-transform:uppercase;font-weight:600}
+.prediction-box{background:linear-gradient(160deg,#fff9e8,#f7f0e0);border:1px solid var(--border);border-radius:8px;padding:14px}
+.scenario{margin:8px 0;padding:11px 12px;border-radius:6px;background:#fff;border-left:4px solid var(--gold);font-size:.88rem}
+.scenario strong{color:var(--goldd)}
+.links{margin-top:14px;font-size:.85rem;gap:18px}
+.links a{color:var(--goldd);text-decoration:none;font-weight:500}
+.footer-ai{text-align:center;margin-top:10px;font-size:.72rem;color:var(--gold);letter-spacing:1.1px;text-transform:uppercase;font-weight:600}
+.disclaimer{font-size:.68rem;color:var(--muted);text-align:center;margin-top:18px;padding:12px 6px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>MoneyCoin AI Monitor <span class="ai-badge">AI</span></h1>
+<p class="subtitle">Coin • Compute Coin • Royal Gold Interface</p>
+</header>
+<div class="group-tabs">
+<button class="group-tab active" onclick="selectGroup('coin', this)">Coin</button>
+<button class="group-tab" onclick="selectGroup('compute', this)">Compute Coin</button>
+</div>
+<div class="coin-tabs" id="coinTabs"></div>
+<div class="card">
+<div class="card-title"><span id="coinTitle">Dogecoin</span> Market Data <span id="modeBadge" class="mode-badge mode-local">LOCAL</span></div>
+<div class="controls">
+<button id="refreshBtn" onclick="tryLive()">Try Live Update</button>
+<button class="secondary" onclick="loadSnapshot()">Use Snapshot</button>
+<button class="help-btn" onclick="toggleHelp()">How to Start / Stop Live</button>
+</div>
+<div class="help-box" id="helpBox">
+<h3>How Live Mode works</h3>
+<p><strong>On GitHub Pages:</strong> Live prices work automatically.</p>
+<p>If you open the HTML file directly (file://), the browser blocks live API calls and snapshot data is used.</p>
+</div>
+<div class="status" id="status">Loading snapshot...</div>
+<div id="content">
+<div class="alert-box alert-hold" id="alertBox">HOLD</div>
+<div class="row">
+<div class="stat"><div class="stat-label">Price (USD)</div><div class="stat-value" id="price">-</div></div>
+<div class="stat"><div class="stat-label">24h Change</div><div class="stat-value" id="change">-</div></div>
+<div class="stat"><div class="stat-label">Market Cap</div><div class="stat-value" id="mcap">-</div></div>
+</div>
+<div class="row">
+<div class="stat"><div class="stat-label">24h Volume</div><div class="stat-value" id="volume">-</div></div>
+<div class="stat"><div class="stat-label">Rank</div><div class="stat-value" id="rank">-</div></div>
+<div class="stat"><div class="stat-label">Symbol</div><div class="stat-value" id="symbol">-</div></div>
+</div>
+<div class="meta" id="chainInfo"></div>
+</div>
+<div class="meta" id="lastUpdate">-</div>
+</div>
+<div class="card">
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab('news', this)">Latest News</button>
+<button class="tab-btn" onclick="switchTab('prediction', this)">AI Prediction — 69 Days</button>
+</div>
+<div id="tab-news" class="tab-panel active"><div id="newsContent"></div></div>
+<div id="tab-prediction" class="tab-panel"><div id="predictionContent"></div></div>
+</div>
+<div class="links" id="coinLinks"></div>
+<div class="footer-ai">MoneyCoin • Multi-Asset AI Monitor</div>
+<div class="disclaimer">Informational only. Not financial advice. Crypto is highly volatile. Always DYOR. Predictions are speculative AI scenarios as of September 3, 2026.</div>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
