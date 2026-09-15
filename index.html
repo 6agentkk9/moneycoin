@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MoneyCoin AI Monitor</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 :root{--card:#fffbf3;--inner:#f7f0e0;--border:#e0d0a8;--gold:#b8860b;--goldl:#d4a84b;--goldd:#8b6914;--text:#2c2416;--muted:#7a6b4e;--green:#2e7d32;--red:#c62828}
@@ -11,7 +12,7 @@
 body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(165deg,#faf6eb 0%,#f3e9d4 40%,#efe2c4 100%);color:var(--text);min-height:100vh;padding:20px 16px;line-height:1.55}
 .container{max-width:860px;margin:0 auto}
 header{text-align:center;margin-bottom:18px;padding:12px 0;border-bottom:2px solid #c9a227}
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--goldd);letter-spacing:1px}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--goldd)}
 .ai-badge{display:inline-block;background:linear-gradient(135deg,#c9a227,#e6c35c);color:#2c2416;font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:3px;margin-left:8px;vertical-align:middle}
 .subtitle{color:var(--muted);font-size:.88rem}
 .group-tabs,.coin-tabs,.controls,.links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
@@ -60,7 +61,7 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 <div class="container">
 <header>
 <h1>MoneyCoin AI Monitor <span class="ai-badge">AI</span></h1>
-<p class="subtitle">Coin • Compute Coin • Royal Gold Interface</p>
+<p class="subtitle">Coin • Compute Coin • Updated Sep 15, 2026</p>
 </header>
 <div class="group-tabs">
 <button class="group-tab active" onclick="selectGroup('coin', this)">Coin</button>
@@ -77,7 +78,6 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 <div class="help-box" id="helpBox">
 <h3>How live data works</h3>
 <p>This public page loads live prices from CoinGecko and live headlines when possible. No local server or .bat file is needed.</p>
-<p>If a feed is blocked, the latest saved briefing is shown instead.</p>
 </div>
 <div class="status" id="status">Loading...</div>
 <div id="content">
@@ -106,9 +106,9 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 </div>
 <div class="links" id="coinLinks"></div>
 <div class="footer-ai">MoneyCoin - Multi-Asset AI Monitor</div>
-<div class="disclaimer">Informational only. Not financial advice. Always DYOR. Briefings updated September 15, 2026. Live headlines refresh when you open the page or switch coins.</div>
+<div class="disclaimer">Informational only. Not financial advice. Briefings updated September 15, 2026.</div>
 </div>
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=20260915b"></script>
+<script src="app.js?v=20260915b"></script>
 </body>
 </html>
