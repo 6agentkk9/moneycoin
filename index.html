@@ -48,63 +48,42 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 .tab-panel{display:none}.tab-panel.active{display:block}
 .news-item{padding:10px 0;border-bottom:1px solid var(--border);font-size:.9rem}
 .news-item a{color:var(--goldd);text-decoration:none;font-weight:600}
-.news-date{color:var(--gold);font-size:.7rem;text-transform:uppercase;font-weight:600}
-.prediction-box{background:linear-gradient(160deg,#fff9e8,#f7f0e0);border:1px solid var(--border);border-radius:8px;padding:14px}
-.scenario{margin:8px 0;padding:11px 12px;border-radius:6px;background:#fff;border-left:4px solid var(--gold);font-size:.88rem}
-.links{margin-top:14px;gap:18px}.links a{color:var(--goldd);text-decoration:none;font-weight:500}
-.footer-ai{text-align:center;margin-top:10px;font-size:.72rem;color:var(--gold);letter-spacing:1.1px;text-transform:uppercase;font-weight:600}
+.news-date{font-size:.72rem;color:var(--muted);margin-bottom:2px}
+.pred-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.pred-box{background:var(--inner);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.pred-label{font-size:.65rem;color:var(--muted);text-transform:uppercase}
+.pred-value{font-weight:600;margin-top:4px}
+.links a{color:var(--goldd);text-decoration:none;font-size:.85rem;font-weight:600;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff}
 .disclaimer{font-size:.68rem;color:var(--muted);text-align:center;margin-top:18px;padding:12px 6px;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
 <div class="container">
 <header>
-<h1>MoneyCoin AI Monitor <span class="ai-badge">AI</span></h1>
+<h1>MoneyCoin <span class="ai-badge">AI MONITOR</span></h1>
 <p class="subtitle">Coin • Compute Coin • Updated Sep 17, 2026</p>
 </header>
-<div class="group-tabs">
-<button class="group-tab active" onclick="selectGroup('coin', this)">Coin</button>
-<button class="group-tab" onclick="selectGroup('compute', this)">Compute Coin</button>
-</div>
+<div class="group-tabs" id="groupTabs"></div>
 <div class="coin-tabs" id="coinTabs"></div>
-<div class="card">
-<div class="card-title"><span id="coinTitle">Dogecoin</span> Market Data <span id="modeBadge" class="mode-badge mode-local">LOCAL</span></div>
-<div class="controls">
-<button id="refreshBtn" onclick="tryLive()">Refresh Live</button>
-<button class="secondary" onclick="loadSnapshot()">Use Snapshot</button>
-<button class="help-btn" onclick="toggleHelp()">How live data works</button>
-</div>
-<div class="help-box" id="helpBox">
-<h3>How live data works</h3>
-<p>Prices come from CoinGecko. Headlines come from Google News for the last 7 days. GitHub Pages is a static site, so the saved briefing only updates when we publish a new version.</p>
-</div>
-<div class="status" id="status">Loading...</div>
-<div id="content">
+<div class="card" id="snapshotCard">
+<div class="card-title" id="coinTitle">—</div>
+<div class="row" id="statsRow"></div>
 <div class="alert-box alert-hold" id="alertBox">HOLD</div>
-<div class="row">
-<div class="stat"><div class="stat-label">Price (USD)</div><div class="stat-value" id="price">-</div></div>
-<div class="stat"><div class="stat-label">24h Change</div><div class="stat-value" id="change">-</div></div>
-<div class="stat"><div class="stat-label">Market Cap</div><div class="stat-value" id="mcap">-</div></div>
+<div class="controls">
+<button onclick="refreshLive()">Refresh live</button>
+<button class="secondary" onclick="toggleHelp()">Help</button>
 </div>
-<div class="row">
-<div class="stat"><div class="stat-label">24h Volume</div><div class="stat-value" id="volume">-</div></div>
-<div class="stat"><div class="stat-label">Rank</div><div class="stat-value" id="rank">-</div></div>
-<div class="stat"><div class="stat-label">Symbol</div><div class="stat-value" id="symbol">-</div></div>
+<div class="help-box" id="helpBox">Prices and 24h change update from CoinGecko when you click Refresh or switch coins. Saved briefing is the dated snapshot + AI prediction below. Live Google News headlines appear in the News tab when available.</div>
+<div class="status" id="status">Ready</div>
 </div>
-<div class="meta" id="chainInfo"></div>
-</div>
-<div class="meta" id="lastUpdate">-</div>
-</div>
-<div class="card">
 <div class="tabs">
-<button class="tab-btn active" onclick="switchTab('news', this)">Latest News</button>
-<button class="tab-btn" onclick="switchTab('prediction', this)">AI Prediction - 69 Days</button>
+<button class="tab-btn active" data-tab="news">News</button>
+<button class="tab-btn" data-tab="prediction">69-day AI view</button>
+<button class="tab-btn" data-tab="links">Links</button>
 </div>
-<div id="tab-news" class="tab-panel active"><div id="newsContent"></div></div>
-<div id="tab-prediction" class="tab-panel"><div id="predictionContent"></div></div>
-</div>
-<div class="links" id="coinLinks"></div>
-<div class="footer-ai">MoneyCoin - Multi-Asset AI Monitor</div>
+<div class="tab-panel active" id="newsPanel"><div id="newsContent"></div></div>
+<div class="tab-panel" id="predictionPanel"><div id="predContent"></div></div>
+<div class="tab-panel" id="linksPanel"><div class="links" id="linksContent"></div></div>
 <div class="disclaimer">Informational only. Not financial advice. Briefing updated September 17, 2026. Live headlines refresh when you open the page or switch coins.</div>
 </div>
 <script src="data.js?v=20260917"></script>
