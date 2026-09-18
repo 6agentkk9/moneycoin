@@ -37,21 +37,19 @@ function applyData(d, isLive) {
   setAlert(change);
   const badge = document.getElementById('modeBadge');
   if (isLive) {
-    badge.textContent = 'LIVE';
-    badge.className = 'mode-badge mode-live';
+    badge.textContent = 'LIVE'; badge.className = 'mode-badge mode-live';
     document.getElementById('status').textContent = 'Live price loaded';
     document.getElementById('chainInfo').textContent = 'Source: CoinGecko - ' + c.name;
   } else {
-    badge.textContent = 'LOCAL';
-    badge.className = 'mode-badge mode-local';
+    badge.textContent = 'LOCAL'; badge.className = 'mode-badge mode-local';
     document.getElementById('status').textContent = 'Using price snapshot';
-    document.getElementById('chainInfo').textContent = 'Snapshot - Sep 15, 2026';
+    document.getElementById('chainInfo').textContent = 'Snapshot - Sep 17, 2026';
   }
   document.getElementById('lastUpdate').textContent = 'Updated: ' + new Date().toLocaleString();
 }
 function renderSnapshotNews(note) {
   const c = COINS[currentCoin];
-  let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">' + (note || 'Latest briefing as of September 15, 2026') + '</p>';
+  let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">' + (note || 'Saved briefing - Sep 17, 2026') + '</p>';
   c.news.forEach(function (n) {
     html += '<div class="news-item"><div class="news-date">' + n.date + '</div><strong>' + n.title + '</strong> - ' + n.text + '</div>';
   });
@@ -60,7 +58,7 @@ function renderSnapshotNews(note) {
 function renderPrediction() {
   const p = COINS[currentCoin].prediction;
   document.getElementById('predictionContent').innerHTML =
-    '<p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;">Horizon: Sep 15 to late November 2026. AI scenarios only - <strong>not financial advice</strong>.</p>' +
+    '<p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;">Horizon: Sep 17 to late November 2026. AI scenarios only - not financial advice.</p>' +
     '<div class="prediction-box">' +
     '<div class="scenario"><strong>Base Case</strong><br>Price range: <span class="positive">' + p.base + '</span></div>' +
     '<div class="scenario"><strong>Bull Case</strong><br>Target zone: <span class="positive">' + p.bull + '</span></div>' +
@@ -73,21 +71,20 @@ function renderLinks() {
   }).join('');
 }
 async function loadLiveNews() {
-  renderSnapshotNews('Loading latest headlines...');
-  const cat = NEWS_CAT[currentCoin] || 'BTC';
+  renderSnapshotNews('Loading live headlines...');
+  const q = NEWS_Q[currentCoin] || COINS[currentCoin].name;
+  const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q + ' when:7d') + '&hl=en-US&gl=US&ceid=US:en';
+  const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss);
   try {
-    const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + encodeURIComponent(cat), { cache: 'no-store', mode: 'cors' });
+    const res = await fetch(url, { cache: 'no-store', mode: 'cors' });
     if (!res.ok) throw new Error('news http');
     const json = await res.json();
-    const items = (json.Data || []).slice(0, 6);
+    const items = (json.items || []).slice(0, 8);
     if (!items.length) throw new Error('no headlines');
-    let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">Live headlines - refreshed just now</p>';
+    let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">Live headlines from Google News - last 7 days</p>';
     items.forEach(function (a) {
-      const d = new Date((a.published_on || 0) * 1000);
-      const date = isNaN(d.getTime()) ? 'Latest' : d.toLocaleDateString();
-      const title = a.title || 'Update';
-      const url = a.url || '#';
-      html += '<div class="news-item"><div class="news-date">' + date + '</div><strong><a href="' + url + '" target="_blank" rel="noopener">' + title + '</a></strong></div>';
+      const date = (a.pubDate || 'Latest').slice(0, 16);
+      html += '<div class="news-item"><div class="news-date">' + date + '</div><strong><a href="' + (a.link || '#') + '" target="_blank" rel="noopener">' + (a.title || 'Update') + '</a></strong></div>';
     });
     html += '<p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">Saved briefing:</p>';
     COINS[currentCoin].news.forEach(function (n) {
@@ -95,7 +92,7 @@ async function loadLiveNews() {
     });
     document.getElementById('newsContent').innerHTML = html;
   } catch (err) {
-    renderSnapshotNews('Live headline feed unavailable. Showing September 15 briefing.');
+    renderSnapshotNews('Live headlines paused. Showing Sep 17 briefing.');
   }
 }
 function renderCoinTabs() {
@@ -117,22 +114,14 @@ function selectGroup(groupId, btn) {
   currentCoin = GROUPS[groupId].coins[0];
   renderCoinTabs();
   document.getElementById('coinTitle').textContent = COINS[currentCoin].name;
-  loadSnapshot();
-  renderPrediction();
-  renderLinks();
-  loadLiveNews();
-  setTimeout(tryLive, 200);
+  loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
 }
 function selectCoin(id, btn) {
   currentCoin = id;
   document.querySelectorAll('.coin-tab').forEach(function (b) { b.classList.remove('active'); });
   btn.classList.add('active');
   document.getElementById('coinTitle').textContent = COINS[id].name;
-  loadSnapshot();
-  renderPrediction();
-  renderLinks();
-  loadLiveNews();
-  setTimeout(tryLive, 200);
+  loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
 }
 function loadSnapshot() { applyData(COINS[currentCoin].snapshot, false); }
 async function tryLive() {
@@ -159,9 +148,4 @@ function switchTab(name, btn) {
   btn.classList.add('active');
 }
 function toggleHelp() { document.getElementById('helpBox').classList.toggle('visible'); }
-renderCoinTabs();
-loadSnapshot();
-renderPrediction();
-renderLinks();
-loadLiveNews();
-setTimeout(tryLive, 600);
+renderCoinTabs(); loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 600);
