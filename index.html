@@ -68,6 +68,14 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 </div>
 <div class="coin-tabs" id="coinTabs"></div>
 <div class="card">
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab('news', this)">Latest News</button>
+<button class="tab-btn" onclick="switchTab('prediction', this)">AI Prediction - 69 Days</button>
+</div>
+<div id="tab-news" class="tab-panel active"><div id="newsContent"></div></div>
+<div id="tab-prediction" class="tab-panel"><div id="predictionContent"></div></div>
+</div>
+<div class="card">
 <div class="card-title"><span id="coinTitle">Dogecoin</span> Market Data <span id="modeBadge" class="mode-badge mode-local">LOCAL</span></div>
 <div class="controls">
 <button id="refreshBtn" onclick="tryLive()">Refresh Live</button>
@@ -76,7 +84,7 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 </div>
 <div class="help-box" id="helpBox">
 <h3>How live data works</h3>
-<p>Prices come from CoinGecko. Headlines come from Google News when available. The saved briefing updates on the Mon/Wed/Fri automation. Do not rewrite this HTML layout.</p>
+<p>Prices come from CoinGecko. Headlines come from Google News when available.</p>
 </div>
 <div class="status" id="status">Loading...</div>
 <div id="content">
@@ -95,19 +103,11 @@ button.secondary,button.help-btn{background:#fff;border:1.5px solid #c9a227;colo
 </div>
 <div class="meta" id="lastUpdate">-</div>
 </div>
-<div class="card">
-<div class="tabs">
-<button class="tab-btn active" onclick="switchTab('news', this)">Latest News</button>
-<button class="tab-btn" onclick="switchTab('prediction', this)">AI Prediction - 69 Days</button>
-</div>
-<div id="tab-news" class="tab-panel active"><div id="newsContent"></div></div>
-<div id="tab-prediction" class="tab-panel"><div id="predictionContent"></div></div>
-</div>
 <div class="links" id="coinLinks"></div>
 <div class="footer-ai">MoneyCoin - Multi-Asset AI Monitor</div>
 <div class="disclaimer">Informational only. Not financial advice. Briefing updated September 21, 2026.</div>
 </div>
-<script src="data.js?v=20260921b"></script>
-<script src="app.js?v=20260921b"></script>
+<script src="data.js?v=20260921c"></script>
+<script src="app.js?v=20260921c"></script>
 </body>
 </html>
