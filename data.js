@@ -13,68 +13,68 @@ const NEWS_Q = {
 const COINS = {
   dogecoin: {
     id: 'dogecoin', name: 'Dogecoin', symbol: 'DOGE', tab: 'DOGE',
-    snapshot: { price: 0.085174, change24h: 4.60, marketCap: 12.9e9, volume24h: 950e6, rank: 12 },
+    snapshot: { price: 0.09372, change24h: 5.5, marketCap: 14.2e9, volume24h: 1.3e9, rank: 12 },
     news: [
-      { date: 'Sep 18, 2026', title: 'DOGE up ~4.6% near $0.085', text: 'Dogecoin tracks the broader rebound after the SEC Innovation Exemption news, holding above the $0.08 support cluster.' },
-      { date: 'Sep 17, 2026', title: 'Fed hike digested, range intact', text: 'Post-hike, DOGE stayed range-bound near $0.08-$0.09 while spot DOGE ETF flows remained light.' },
-      { date: 'Sep 15, 2026', title: 'Fib rejection then bounce', text: '4h charts showed rejection at the 0.618 Fib near $0.08 followed by buyers defending the same zone.' }
+      { date: 'Sep 21, 2026', title: 'DOGE rides BTC to $85k rally', text: 'Dogecoin advanced with majors as Bitcoin hit multi-month highs and short liquidations accelerated the risk-on move.' },
+      { date: 'Sep 20, 2026', title: 'Altcoin rotation lifts memes', text: 'DOGE participated in the broader altcoin rebound after the post-Fed digests and clarity-act volatility faded.' },
+      { date: 'Sep 18, 2026', title: 'Range holds above $0.08', text: 'Earlier in the week DOGE defended the $0.08 zone while the market absorbed the rate hike and legislative headlines.' }
     ],
-    prediction: { base: '$0.070 - $0.11', bull: '$0.12 - $0.18', bear: '$0.050 - $0.070', summary: 'DOGE remains BTC-beta. 69-day path still hinges on liquidity and whether $0.08 holds. Not financial advice.' },
+    prediction: { base: '$0.075 - $0.12', bull: '$0.13 - $0.20', bear: '$0.055 - $0.075', summary: 'DOGE remains BTC-beta. 69-day path still hinges on liquidity and whether $0.09 holds. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://dogecoin.com/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/dogecoin' }, { name: 'Explorer', url: 'https://dogechain.info/' }]
   },
   ethereum: {
     id: 'ethereum', name: 'Ethereum', symbol: 'ETH', tab: 'ETH',
-    snapshot: { price: 2502.36, change24h: 1.55, marketCap: 302e9, volume24h: 18e9, rank: 2 },
+    snapshot: { price: 2727.38, change24h: 3.2, marketCap: 329e9, volume24h: 20e9, rank: 2 },
     news: [
-      { date: 'Sep 18, 2026', title: 'ETH near $2,500 on exemption lift', text: 'Ethereum rose with the tape after the SEC temporary Innovation Exemption for tokenized-securities venues.' },
-      { date: 'Sep 17, 2026', title: 'ETF outflows still a headwind', text: 'Spot ETH ETFs saw continued outflows midweek even as price recovered toward the mid-$2,400s and higher.' },
-      { date: 'Sep 16, 2026', title: 'CLARITY miss then rebound', text: 'The failed Senate CLARITY vote weighed on risk assets; ETH later stabilized with BTC above $76k.' }
+      { date: 'Sep 21, 2026', title: 'ETH clears $2,700 on broad rally', text: 'Ethereum followed Bitcoin higher as ETF demand and short covering supported the move above $2,700.' },
+      { date: 'Sep 20, 2026', title: 'Altcoin season chatter returns', text: 'ETH outperformed some large caps in the weekend recovery after the prior week’s rate-hike and bill volatility.' },
+      { date: 'Sep 18, 2026', title: 'Post-hike stabilization', text: 'ETH held mid-$2,400s earlier then extended with the tape once the Fed move was digested.' }
     ],
-    prediction: { base: '$2,100 - $2,900', bull: '$3,200 - $3,800', bear: '$1,800 - $2,100', summary: 'Hawkish Fed + mixed ETF flow still caps ETH near term. 69-day rebound needs sustained BTC stability. Not financial advice.' },
+    prediction: { base: '$2,300 - $3,100', bull: '$3,400 - $4,000', bear: '$1,900 - $2,300', summary: 'ETF flows and BTC leadership still set the near-term ceiling. 69-day rebound needs sustained risk appetite. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://ethereum.org/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/ethereum' }, { name: 'Explorer', url: 'https://etherscan.io/' }]
   },
   bitcoin: {
     id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC', tab: 'BTC',
-    snapshot: { price: 77939, change24h: 1.39, marketCap: 1.55e12, volume24h: 23e9, rank: 1 },
+    snapshot: { price: 85170, change24h: 4.5, marketCap: 1.69e12, volume24h: 25e9, rank: 1 },
     news: [
-      { date: 'Sep 18, 2026', title: 'BTC holds ~$78k after SEC exemption', text: 'Bitcoin climbed toward $78k as the SEC issued a temporary Innovation Exemption for certain tokenized venues.' },
-      { date: 'Sep 17, 2026', title: 'ETF outflows vs price rebound', text: 'Spot BTC ETFs recorded large midweek outflows even as price recovered from the post-hike dip.' },
-      { date: 'Sep 16, 2026', title: 'Rate hike absorbed', text: 'The Fed raised rates 25 bp; BTC held the mid-$76k area and later extended gains with the broader market.' }
+      { date: 'Sep 21, 2026', title: 'BTC hits $85k, shorts liquidated', text: 'Bitcoin surged above $85,000 for the first time since January amid heavy short liquidations and improved risk sentiment.' },
+      { date: 'Sep 20, 2026', title: 'Reclaim of $80k+ levels', text: 'BTC extended the recovery from the post-Fed dip, with analysts watching the $80k–$85k zone as key resistance-turned-support.' },
+      { date: 'Sep 18, 2026', title: 'Rate hike absorbed', text: 'The 25 bp Fed hike was digested; BTC later climbed as legislative noise faded and liquidity returned.' }
     ],
-    prediction: { base: '$70,000 - $88,000', bull: '$92,000 - $110,000', bear: '$60,000 - $70,000', summary: 'Policy week digested. Base case is a wide range over the next 69 days unless ETF demand returns strongly. Not financial advice.' },
+    prediction: { base: '$75,000 - $95,000', bull: '$100,000 - $120,000', bear: '$65,000 - $75,000', summary: 'Policy week digested and liquidity improving. Base case is a higher range over the next 69 days if ETF demand holds. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://bitcoin.org/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/bitcoin' }, { name: 'Explorer', url: 'https://mempool.space/' }]
   },
   io: {
     id: 'io', name: 'io.net', symbol: 'IO', tab: 'IO',
-    snapshot: { price: 0.137388, change24h: 5.68, marketCap: 54e6, volume24h: 16e6, rank: 480 },
+    snapshot: { price: 0.150, change24h: 10.0, marketCap: 60e6, volume24h: 30e6, rank: 400 },
     news: [
-      { date: 'Sep 18, 2026', title: 'IO +5.7% with compute beta', text: 'io.net tracked the AI-compute rebound; market-cap comps remain near the $50M+ range.' },
-      { date: 'Sep 17, 2026', title: 'Distributed compute narrative', text: 'io.net continues to argue for an open, distributed GPU supply chain matched to AI workloads.' },
-      { date: 'Sep 10, 2026', title: 'DeepSeek V4.1 Flash listed', text: 'io.net said DeepSeek V4.1 Flash went live on day zero for inference workloads on the network.' }
+      { date: 'Sep 21, 2026', title: 'IO +~10% with compute beta', text: 'io.net tracked the AI-compute rebound as majors rallied; market-cap comps remain in the $50–60M range.' },
+      { date: 'Sep 18, 2026', title: 'Distributed GPU narrative', text: 'io.net continues to position as open distributed GPU supply for AI inference workloads.' },
+      { date: 'Sep 15, 2026', title: 'Sector rotation continues', text: 'Compute tokens participated in the broader risk-on move after the mid-September volatility.' }
     ],
-    prediction: { base: '$0.09 - $0.22', bull: '$0.28 - $0.45', bear: '$0.05 - $0.09', summary: 'IO needs BTC calm plus visible inference demand. Unlocks can still dominate a 69-day window. Not financial advice.' },
+    prediction: { base: '$0.10 - $0.25', bull: '$0.30 - $0.50', bear: '$0.06 - $0.10', summary: 'IO needs BTC calm plus visible inference demand. Unlocks can still dominate a 69-day window. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://io.net/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/io' }, { name: 'Solana', url: 'https://solscan.io/token/BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K' }]
   },
   'akash-network': {
     id: 'akash-network', name: 'Akash Network', symbol: 'AKT', tab: 'AKT',
-    snapshot: { price: 0.543525, change24h: 5.99, marketCap: 162e6, volume24h: 4e6, rank: 200 },
+    snapshot: { price: 0.63, change24h: 8.0, marketCap: 185e6, volume24h: 8e6, rank: 180 },
     news: [
-      { date: 'Sep 18, 2026', title: 'AKT +6% with DePIN tape', text: 'Akash followed the broader AI-compute rebound; price is sector-beta rather than single-headline driven.' },
-      { date: 'Sep 17, 2026', title: 'BME still needs paid leases', text: 'Burn-mint is live, but net supply only tightens if GPU/CPU lease spend stays elevated through the quarter.' },
-      { date: 'Sep 17, 2026', title: 'Sector review continues', text: 'Render vs Akash vs io.net comparisons remain the main narrative after the compute-token rebound.' }
+      { date: 'Sep 21, 2026', title: 'AKT rises with DePIN tape', text: 'Akash followed the AI-compute rebound; price remains sector-beta rather than single-headline driven.' },
+      { date: 'Sep 18, 2026', title: 'BME lease demand watched', text: 'Burn-mint economics stay live; net supply tightens only if GPU/CPU lease spend remains elevated.' },
+      { date: 'Sep 17, 2026', title: 'Compute peer comparison', text: 'Render vs Akash vs io.net narratives continue to frame the DePIN/compute group.' }
     ],
-    prediction: { base: '$0.35 - $0.75', bull: '$0.85 - $1.20', bear: '$0.22 - $0.35', summary: 'AKT is sector beta. A 69-day bounce needs BTC stability and visible lease demand. Not financial advice.' },
+    prediction: { base: '$0.40 - $0.85', bull: '$0.95 - $1.40', bear: '$0.25 - $0.40', summary: 'AKT is sector beta. A 69-day bounce needs BTC stability and visible lease demand. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://akash.network/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/akash-network' }, { name: 'Docs', url: 'https://akash.network/docs/' }]
   },
   'render-token': {
     id: 'render-token', name: 'Render', symbol: 'RENDER', tab: 'RENDER',
-    snapshot: { price: 1.51, change24h: 8.57, marketCap: 780e6, volume24h: 52e6, rank: 86 },
+    snapshot: { price: 1.78, change24h: 9.5, marketCap: 920e6, volume24h: 70e6, rank: 70 },
     news: [
-      { date: 'Sep 18, 2026', title: 'RENDER +8.6% leads compute', text: 'Render remains the liquid compute name and is outperforming on the day near the $1.50 area.' },
-      { date: 'Sep 17, 2026', title: 'Node bonus narrative in focus', text: 'Traders are watching the upcoming node-operator bonus claims window (early October) as a short-term sentiment driver.' },
-      { date: 'Sep 14, 2026', title: 'Platform project highlights', text: 'Render Network highlighted recent projects rendered on its platform, including high-resolution and game titles.' }
+      { date: 'Sep 21, 2026', title: 'RENDER leads compute on rally', text: 'Render remained the liquid compute name and outperformed as Bitcoin cleared $85k and risk appetite returned.' },
+      { date: 'Sep 18, 2026', title: 'Node bonus window near', text: 'Traders continue to watch the early-October node-operator bonus claims as a short-term sentiment driver.' },
+      { date: 'Sep 15, 2026', title: 'Platform project highlights', text: 'Render Network highlighted recent high-resolution and game titles rendered on its platform.' }
     ],
-    prediction: { base: '$1.05 - $2.00', bull: '$2.30 - $3.40', bear: '$0.75 - $1.05', summary: 'RENDER should keep leading the compute group on liquidity. Base case is a range unless AI-job demand and BTC both turn up. Not financial advice.' },
+    prediction: { base: '$1.20 - $2.30', bull: '$2.50 - $3.80', bear: '$0.85 - $1.20', summary: 'RENDER should keep leading the compute group on liquidity. Base case is a higher range if AI-job demand and BTC both hold. Not financial advice.' },
     links: [{ name: 'Official', url: 'https://rendernetwork.com/' }, { name: 'CoinGecko', url: 'https://www.coingecko.com/en/coins/render' }, { name: 'Docs', url: 'https://know.rendernetwork.com/' }]
   }
 };
