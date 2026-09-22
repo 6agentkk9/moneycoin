@@ -43,13 +43,13 @@ function applyData(d, isLive) {
   } else {
     badge.textContent = 'LOCAL'; badge.className = 'mode-badge mode-local';
     document.getElementById('status').textContent = 'Using price snapshot';
-    document.getElementById('chainInfo').textContent = 'Snapshot - Sep 17, 2026';
+    document.getElementById('chainInfo').textContent = 'Snapshot - Sep 21, 2026';
   }
   document.getElementById('lastUpdate').textContent = 'Updated: ' + new Date().toLocaleString();
 }
 function renderSnapshotNews(note) {
   const c = COINS[currentCoin];
-  let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">' + (note || 'Saved briefing - Sep 17, 2026') + '</p>';
+  let html = '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;">' + (note || 'Saved briefing') + '</p>';
   c.news.forEach(function (n) {
     html += '<div class="news-item"><div class="news-date">' + n.date + '</div><strong>' + n.title + '</strong> - ' + n.text + '</div>';
   });
@@ -58,12 +58,12 @@ function renderSnapshotNews(note) {
 function renderPrediction() {
   const p = COINS[currentCoin].prediction;
   document.getElementById('predictionContent').innerHTML =
-    '<p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;">Horizon: Sep 17 to late November 2026. AI scenarios only - not financial advice.</p>' +
+    '<p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;">69-day AI scenarios only - not financial advice.</p>' +
     '<div class="prediction-box">' +
     '<div class="scenario"><strong>Base Case</strong><br>Price range: <span class="positive">' + p.base + '</span></div>' +
     '<div class="scenario"><strong>Bull Case</strong><br>Target zone: <span class="positive">' + p.bull + '</span></div>' +
     '<div class="scenario"><strong>Bear Case</strong><br>Downside zone: <span class="negative">' + p.bear + '</span></div>' +
-    '<p style="font-size:0.84rem;margin-top:12px;"><strong style="color:var(--gold-dark)">AI Summary:</strong> ' + p.summary + '</p></div>';
+    '<p style="font-size:0.84rem;margin-top:12px;"><strong>AI Summary:</strong> ' + p.summary + '</p></div>';
 }
 function renderLinks() {
   document.getElementById('coinLinks').innerHTML = COINS[currentCoin].links.map(function (l) {
@@ -92,7 +92,7 @@ async function loadLiveNews() {
     });
     document.getElementById('newsContent').innerHTML = html;
   } catch (err) {
-    renderSnapshotNews('Live headlines paused. Showing Sep 17 briefing.');
+    renderSnapshotNews('Live headlines paused. Showing saved briefing.');
   }
 }
 function renderCoinTabs() {
@@ -114,14 +114,14 @@ function selectGroup(groupId, btn) {
   currentCoin = GROUPS[groupId].coins[0];
   renderCoinTabs();
   document.getElementById('coinTitle').textContent = COINS[currentCoin].name;
-  loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
+  loadSnapshot(); renderPrediction(); renderSignal(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
 }
 function selectCoin(id, btn) {
   currentCoin = id;
   document.querySelectorAll('.coin-tab').forEach(function (b) { b.classList.remove('active'); });
   btn.classList.add('active');
   document.getElementById('coinTitle').textContent = COINS[id].name;
-  loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
+  loadSnapshot(); renderPrediction(); renderSignal(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 200);
 }
 function loadSnapshot() { applyData(COINS[currentCoin].snapshot, false); }
 async function tryLive() {
@@ -147,5 +147,23 @@ function switchTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
 }
+function renderSignal() {
+  var el = document.getElementById('signalContent');
+  if (!el) return;
+  if (typeof SIGNALS === 'undefined' || !SIGNALS.coins) {
+    el.innerHTML = '<p>Signal file not loaded.</p>';
+    return;
+  }
+  var s = SIGNALS.coins[currentCoin];
+  if (!s) { el.innerHTML = '<p>No 6-month signal for this coin.</p>'; return; }
+  var cls = s.bias === 'Accumulate' ? 'alert-buy' : (s.bias === 'Reduce' ? 'alert-sell' : 'alert-hold');
+  var reasons = (s.reasons || []).map(function (r) { return '<div class="news-item">' + r + '</div>'; }).join('');
+  el.innerHTML =
+    '<div class="alert-box ' + cls + '">6-MONTH: ' + s.bias.toUpperCase() + ' · Conviction ' + s.conviction + ' · Score ' + s.score + '</div>' +
+    '<div class="prediction-box"><p><strong>Horizon:</strong> ' + (SIGNALS.horizon || '6m') + ' · Updated ' + SIGNALS.updated + '</p>' +
+    reasons +
+    '<div class="scenario"><strong>Invalidation:</strong> ' + (s.invalidation || '-') + '</div>' +
+    '<p class="meta">Research score only. Not financial advice.</p></div>';
+}
 function toggleHelp() { document.getElementById('helpBox').classList.toggle('visible'); }
-renderCoinTabs(); loadSnapshot(); renderPrediction(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 600);
+renderCoinTabs(); loadSnapshot(); renderPrediction(); renderSignal(); renderLinks(); loadLiveNews(); setTimeout(tryLive, 600);
