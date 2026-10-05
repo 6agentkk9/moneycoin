@@ -107,6 +107,7 @@ function renderCoinTabs() {
     wrap.appendChild(btn);
   });
 }
+function switchGroup(groupId, btn) { selectGroup(groupId, btn); }
 function selectGroup(groupId, btn) {
   currentGroup = groupId;
   document.querySelectorAll('.group-tab').forEach(function (b) { b.classList.remove('active'); });
